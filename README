@@ -1,3 +1,5 @@
+Use emitter.lua to create particles in corona SDK. Effects like smoke can be achieved using this package.
+
 SAMPLE USAGE 1:
 
 local emitter = require("emitter")
