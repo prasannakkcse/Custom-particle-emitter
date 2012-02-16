@@ -1,0 +1,41 @@
+SAMPLE USAGE 1:
+
+local emitter = require("emitter")
+local PARTICLES_PER_BURST = 20
+local emit1 = emitter.createEmitter(<radiusRange>, <thickness>,<particleDuration>, <initAlpha>, <endAlpha>)
+emitter.setColor(emit1, <red>, <green>, <blue>)
+ 
+for i = 1,PARTICLES_PER_BURST do
+  emitter.emit(emit1, <group>, <x>, <y>) --emits single particle per call  
+end     
+
+SAMPLE USAGE 2: SMOKE
+
+local emitter = require("emitter")
+local mainGroup = display.newGroup()
+local emit1
+local PARTICLES_PER_BURST = 6
+local i
+local mem = display.newText("Memory :"..tostring(collectgarbage("count")), 0, 0, nil, 20)
+ 
+local function init()
+ 
+emit1 = emitter.createEmitter(180,  140,  1500, 0.05, 0)
+emitter.setColor(emit1,255,255,0)
+ 
+end
+ 
+local function burst(event)
+ 
+    for i = 1,PARTICLES_PER_BURST do
+                emitter.emit(emit1, mainGroup, event.x, event.y)   
+                
+        end     
+        
+        mem.text = "Memory :"..tostring(collectgarbage("count"))
+        
+end
+ 
+Runtime:addEventListener("touch", burst)
+ 
+init()
